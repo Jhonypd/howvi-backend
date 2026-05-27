@@ -8,17 +8,18 @@ import {
 } from "../types/response.js";
 import { ComunicacaoDTO } from "../types/db/comunicacao.js";
 import { UnidadeDTO, UnidadeListagemDTO } from "../types/db/unidade.js";
-import type { ListarUnidadesRequest } from "../types/request/unidade.js";
+import type { FiltroListagemUnidadeDTO } from "../types/db/unidade.js";
 
 const unidadeService = new UnidadeService();
 const comunicacaoService = new ComunicacaoService();
 
 export class UnidadeController {
   async listar(
-    req: ListarUnidadesRequest,
+    req: Request,
     res: Response<ApiResponse<{ unidades: UnidadeListagemDTO[] }>>,
   ) {
-    const { nome, cidade, estado } = req.query;
+    const { nome, cidade, estado } =
+      req.query as Partial<FiltroListagemUnidadeDTO>;
     const unidades = await unidadeService.listarUnidades({
       nome,
       cidade,
