@@ -28,19 +28,17 @@ export class ComunicacaoController {
     });
 
     if (!comunicacao) {
-      return res
-        .status(404)
-        .json(
-          respostaErro({
-            mensagem: "Unidade não encontrada.",
-            codigoHttp: 404,
-          }),
-        );
+      return res.status(404).json(
+        respostaErro({
+          mensagem: "Unidade não encontrada.",
+          codigoHttp: 404,
+        }),
+      );
     }
 
     return res.status(201).json(
       respostaSucesso({
-        resultado: comunicacao,
+        resultado: { id: comunicacao.id },
         mensagem: "Comunicação criada com sucesso.",
         codigoHttp: 201,
       }),
