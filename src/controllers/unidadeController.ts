@@ -59,7 +59,7 @@ export class UnidadeController {
     if (!unidade) {
       return res.status(404).json(
         respostaErro({
-          mensagem: "Unidade nao encontrada.",
+          mensagem: "Unidade não encontrada.",
           codigoHttp: 404,
         }),
       );
@@ -84,7 +84,7 @@ export class UnidadeController {
     if (!unidadeExiste) {
       return res.status(404).json(
         respostaErro({
-          mensagem: "Unidade nao encontrada.",
+          mensagem: "Unidade não encontrada.",
           codigoHttp: 404,
         }),
       );
