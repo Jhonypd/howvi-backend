@@ -1,0 +1,211 @@
+# HOW VI - Backend
+
+API REST desenvolvida para o projeto acadêmico **HANDS ON WORK VI**, responsável pelo gerenciamento e consulta de Unidades de Conservação Ambiental e registro de comunicações realizadas pelos usuários.
+
+## Tecnologias Utilizadas
+
+- Node.js
+- TypeScript
+- Express
+- PostgreSQL
+- postgres
+- dotenv
+
+---
+
+## Arquitetura
+
+O projeto foi organizado em camadas para separar responsabilidades e facilitar a manutenção.
+
+```text
+src/
+├── config/
+├── controllers/
+├── middlewares/
+├── repositories/
+├── routes/
+├── services/
+├── types/
+├── app.ts
+└── server.ts
+```
+
+### Fluxo da aplicação
+
+```text
+Request
+    ↓
+Route
+    ↓
+Controller
+    ↓
+Service
+    ↓
+Repository
+    ↓
+PostgreSQL
+```
+
+---
+
+## Configuração
+
+### 1. Clonar o projeto
+
+```bash
+git clone https://github.com/Jhonypd/howvi-backend.git
+```
+
+### 2. Instalar dependências
+
+```bash
+npm install
+```
+
+### 3. Configurar variáveis de ambiente
+
+Criar um arquivo `.env`:
+
+```env
+DATABASE_URL=postgresql://usuario:senha@host:5432/banco
+PORT=4000
+```
+
+### 4. Executar o projeto
+
+Modo desenvolvimento:
+
+```bash
+npm run dev
+```
+
+Build:
+
+```bash
+npm run build
+```
+
+Produção:
+
+```bash
+npm start
+```
+
+---
+
+## Banco de Dados
+
+O sistema utiliza PostgreSQL.
+
+Principais entidades:
+
+- Instituição
+- Unidade de Conservação
+- Município
+- Comunicação
+
+Relacionamentos:
+
+- Uma instituição pode possuir várias unidades.
+- Uma unidade pode abranger vários municípios.
+- Uma unidade pode receber várias comunicações.
+
+---
+
+## Endpoints
+
+### Listar unidades
+
+```http
+GET /api/unidades
+```
+
+Retorna todas as unidades cadastradas.
+
+---
+
+### Obter unidade por ID
+
+```http
+GET /api/unidades/:id
+```
+
+Retorna os detalhes completos de uma unidade.
+
+---
+
+### Listar comunicações da unidade
+
+```http
+GET /api/unidades/:id/comunicacoes
+```
+
+Retorna as comunicações da unidade ordenadas da mais recente para a mais antiga.
+
+---
+
+### Criar comunicação
+
+```http
+POST /api/comunicacoes
+```
+
+Body:
+
+```json
+{
+  "titulo": "Lixo irregular próximo à trilha",
+  "descricaoDetalhada": "Foi identificado descarte irregular de resíduos.",
+  "emailComunicante": "usuario@email.com",
+  "idUnidade": "uuid-da-unidade"
+}
+```
+
+Resposta:
+
+```json
+{
+  "sucesso": true,
+  "mensagem": "Comunicação criada com sucesso."
+}
+```
+
+---
+
+## Regras de Negócio
+
+### Comunicação
+
+Campos obrigatórios:
+
+- título
+- descrição detalhada
+- e-mail do comunicante
+- unidade de conservação
+
+Status inicial:
+
+```text
+0 - Em análise
+```
+
+---
+
+## Objetivo Acadêmico
+
+Este projeto foi desenvolvido para atender aos requisitos do trabalho HANDS ON WORK VI da disciplina Projeto e Desenvolvimento de Sistema Computacional com Persistência de Dados, contemplando:
+
+- Modelagem de dados
+- Persistência em PostgreSQL
+- API REST
+- Consulta de unidades de conservação
+- Registro de comunicações ambientais
+
+---
+
+## Autor
+
+Jhony Pereira Duarte
+
+Universidade do Vale do Itajaí – UNIVALI
+Curso de Análise e Desenvolvimento de Sistemas
