@@ -4,6 +4,7 @@ import type {
   CriacaoComunicacaoDTO,
   ComunicacaoDTO,
 } from "../types/db/comunicacao.js";
+import { validarCriacaoComunicacao } from "../validators/comunicacaoValidator.js";
 
 const comunicacaoRepository = new ComunicacaoRepository();
 const unidadeRepository = new UnidadeRepository();
@@ -12,6 +13,8 @@ export class ComunicacaoService {
   async criarComunicacao(
     dados: CriacaoComunicacaoDTO,
   ): Promise<ComunicacaoDTO | null> {
+    validarCriacaoComunicacao(dados);
+
     const unidadeExiste = await unidadeRepository.buscarUnidadePorId(
       dados.idUnidade,
     );
